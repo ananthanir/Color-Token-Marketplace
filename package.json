@@ -1,0 +1,29 @@
+{
+  "name": "color-token-marketplace",
+  "version": "1.0.0",
+  "description": "A general NFT token marketplace, with color token collection",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ananthanir/Color-Token-Marketplace.git"
+  },
+  "keywords": [
+    "NFT",
+    "Ethereum",
+    "Infura",
+    "Truffle",
+    "Solidity"
+  ],
+  "author": "Ananthan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ananthanir/Color-Token-Marketplace/issues"
+  },
+  "homepage": "https://github.com/ananthanir/Color-Token-Marketplace#readme"
+}
