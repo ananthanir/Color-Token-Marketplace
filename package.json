@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/ananthanir/Color-Token-Marketplace/issues"
   },
-  "homepage": "https://github.com/ananthanir/Color-Token-Marketplace#readme"
+  "homepage": "https://github.com/ananthanir/Color-Token-Marketplace#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.1"
+  }
 }

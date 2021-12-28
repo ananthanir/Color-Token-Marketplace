@@ -76,6 +76,7 @@ function App() {
               </Col>
             ))}
           </Row>
+          <br/>
         </Tab>
         <Tab
           eventKey="marketPlace"
@@ -113,6 +114,7 @@ function App() {
               </Col>
             ))}
           </Row>
+          <br/>
         </Tab>
       </Tabs>
     </div>
