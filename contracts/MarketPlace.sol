@@ -36,6 +36,7 @@ contract NFTMarket is ReentrancyGuard {
         payable
         nonReentrant
     {
+        require(msg.sender == IERC721(nftContract).ownerOf(tokenId));
         require(
             msg.value == listingPrice,
             "Price must be equal to listing price"
