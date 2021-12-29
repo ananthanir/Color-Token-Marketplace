@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract NFTMarket is ReentrancyGuard {
     using Counters for Counters.Counter;
-    Counters.Counter public _itemIds;
+    Counters.Counter public itemIds;
 
     address payable owner;
     uint256 listingPrice = 0.025 ether;
@@ -26,6 +26,10 @@ contract NFTMarket is ReentrancyGuard {
 
     mapping(uint256 => MarketItem) public idToMarketItem;
 
+    function getItemCount() public view returns (uint256) {
+        return itemIds.current();
+    }
+
     /* Places an item for sale on the marketplace */
     function createMarketItem(address nftContract, uint256 tokenId)
         public
@@ -37,8 +41,8 @@ contract NFTMarket is ReentrancyGuard {
             "Price must be equal to listing price"
         );
 
-        _itemIds.increment();
-        uint256 itemId = _itemIds.current();
+        itemIds.increment();
+        uint256 itemId = itemIds.current();
 
         idToMarketItem[itemId] = MarketItem(
             itemId,
@@ -47,9 +51,6 @@ contract NFTMarket is ReentrancyGuard {
             payable(msg.sender),
             false
         );
-
-         IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
-        // IERC721(nftContract).approve(address(this), tokenId);
     }
 
     /* Creates the sale of a marketplace item */
@@ -66,7 +67,11 @@ contract NFTMarket is ReentrancyGuard {
         );
 
         idToMarketItem[itemId].seller.transfer(msg.value);
-        IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
+        IERC721(nftContract).transferFrom(
+            idToMarketItem[itemId].seller,
+            msg.sender,
+            tokenId
+        );
         idToMarketItem[itemId].sold = true;
         payable(owner).transfer(listingPrice);
     }

@@ -9,11 +9,15 @@ contract NFT is ERC721 {
     mapping(string => bool) _colorExists;
 
     using Counters for Counters.Counter;
-    Counters.Counter public tokenIds;
+    Counters.Counter private tokenIds;
     address contractAddress;
 
     constructor(address marketplaceAddress) ERC721("ColorToken", "CT") {
         contractAddress = marketplaceAddress;
+    }
+
+    function getTokenCount() public view returns (uint256) {
+        return tokenIds.current();
     }
 
     function createToken(string memory colorCode) public {
@@ -23,7 +27,9 @@ contract NFT is ERC721 {
         uint256 tokenId = tokenIds.current();
         colorsName[tokenId] = colorCode;
 
+        _colorExists[colorCode] = true;
+
         _mint(msg.sender, tokenId);
-        setApprovalForAll(contractAddress, true);
+        approve(contractAddress, tokenId);
     }
 }
