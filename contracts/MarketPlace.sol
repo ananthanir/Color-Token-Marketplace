@@ -62,6 +62,7 @@ contract NFTMarket is ReentrancyGuard {
         nonReentrant
     {
         uint256 tokenId = idToMarketItem[itemId].tokenId;
+        require(msg.sender != IERC721(nftContract).ownerOf(tokenId));
         require(
             msg.value == 1 ether,
             "Please submit the asking price in order to complete the purchase"
